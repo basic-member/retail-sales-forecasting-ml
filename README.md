@@ -47,11 +47,11 @@ Business decision support
 
 **🔐 What’s NOT Included (Full Version Only)**
 The following are intentionally excluded from this public demo:
-Hyperparameter optimization (GridSearchCV)
+Hyperparameter optimization (**GridSearchCV**)
 Feature importance & explainability reports
 Business-specific feature engineering
 Advanced model comparison
-High-accuracy tuned model (R² > 0.95)
+High-accuracy tuned model (**R² > 0.95**)
 Deployment-ready pipeline
 
 **📈 Full Version & Customization**
