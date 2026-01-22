@@ -1,5 +1,6 @@
 **Machine Learning Sales Prediction – Demo Project**
-                 **📌 Project Overview**
+
+**📌 Project Overview**
 This repository contains a **demo machine learning** pipeline for predicting numerical targets (e.g. sales, demand, revenue) using **Python & Scikit-Learn**.
 **⚠️ Important:**
 This is a **demonstration version** created to showcase coding style, ML workflow, and evaluation approach.
