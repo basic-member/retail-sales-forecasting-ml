@@ -1,113 +1,116 @@
-**achine Learning Sales Prediction – Demo Project
-Project Overview**
+## Machine Learning Sales Prediction – Demo Project
 
-This repository presents a **clean, end-to-end machine learning regression pipeline** designed to predict numerical business targets such as sales, demand, or revenue.
+### Project Overview
 
-The goal of this project is to **demonstrate sound machine learning practice:**
-from data preparation and model training to evaluation and reproducibility.
-The focus is on clarity, correctness, and structure, not on squeezing maximum accuracy from a specific dataset.
+This repository presents a clean, end-to-end machine learning regression pipeline for predicting numerical business targets such as **sales, demand, or revenue** from tabular data.
 
-**Problem Framing**
+The project is intentionally designed as a **transparent and auditable baseline**, focusing on **sound machine learning practice** rather than maximizing benchmark performance. The emphasis is on clarity of decisions, reproducibility, and **business-aligned evaluation**.
 
-Accurate sales or demand prediction is a common requirement in business analytics.
-This project models such a task using tabular data and evaluates the results with standard regression metrics that are easy to interpret in business contexts.
+---
 
-**What This Project Demonstrates**
+### Problem Framing
 
-Structured data loading and validation
+Accurate sales and demand forecasting is a recurring requirement in business analytics and operational planning.  
+This project models a generic version of that problem using structured tabular data and frames it as a supervised regression task.
 
-Train / test data splitting with reproducibility
+The objective is not to optimize for a specific industry or dataset, but to demonstrate how such problems are **approached, structured, and evaluated** in real-world ML workflows.
 
-Handling missing values via imputation
+---
 
-Model training using a tree-based ensemble
+### What This Project Demonstrates
 
-Evaluation with interpretable regression metrics (MAE, RMSE)
+- Structured data loading with basic validation checks  
+- Reproducible train / test splitting  
+- Handling missing values via explicit imputation strategy  
+- Model training using a tree-based ensemble suitable for tabular data  
+- Evaluation using regression metrics that are **interpretable in business contexts**  
+- Clear separation of concerns and readable, reusable code
 
-Clear, readable, and reusable code layout
+---
 
-**Why Random Forest?**
+### Model Choice: Why Random Forest?
 
-Random Forest was chosen because:
+Random Forest was selected as a **strong, low-assumption baseline** because:
 
-it performs well on tabular data with minimal assumptions,
+- it performs reliably on tabular datasets without heavy preprocessing,  
+- it captures non-linear feature interactions naturally,  
+- it is robust to outliers and insensitive to feature scaling,  
+- it provides stable performance with minimal tuning.
 
-it handles non-linear relationships naturally,
+The goal is **methodological correctness** and defensible defaults, not leaderboard optimization.
 
-it is robust to outliers and feature scaling issues,
+---
 
-it provides a strong baseline for many business forecasting tasks.
-
-The intent here is **methodological correctness**, not model competition.
-
-**Tech Stack**
-
-Python 3.9+
-
-Pandas
-
-NumPy
-
-Scikit-learn
-
-**Evaluation Metrics**
+### Evaluation Metrics and Interpretation
 
 The model is evaluated using:
 
-**MAE (Mean Absolute Error)**
-Measures average prediction error in the same unit as the target variable.
+- **MAE (Mean Absolute Error)**  
+  Represents the average absolute prediction error in the same unit as the target variable.  
+  In a business setting, MAE directly answers the question:  
+  **“On average, how far off are our predictions?”**
 
-**RMSE (Root Mean Squared Error)**
-Penalizes larger errors more strongly, useful for risk-sensitive decisions.
+- **RMSE (Root Mean Squared Error)**  
+  Penalizes larger errors more strongly, making it useful when large forecasting mistakes carry higher operational or financial risk.
 
-These metrics are commonly used in operational and financial forecasting.
+Using both metrics provides **complementary insight**: MAE for typical performance and RMSE for downside risk.
 
-**Project Structure**
-├── sample_data.csv      # Sample dataset (anonymized)
-├── demo_model.py        # End-to-end ML pipeline
-├── requirements.txt     # Dependencies
-└── README.md
+---
 
-**How to Run**
-pip install -r requirements.txt
-python demo_model.py
+### Project Structure
 
-**Business Applicability**
+├── sample_data.csv      # Sample anonymized dataset  
+├── demo_model.py        # End-to-end ML pipeline  
+├── requirements.txt     # Python dependencies  
+└── README.md  
 
-With appropriate data and feature engineering, this pipeline can be adapted for:
+---
 
-Sales forecasting
+### How to Run
 
-Demand prediction
+pip install -r requirements.txt  
+python demo_model.py  
 
-Revenue estimation
+---
 
-Inventory planning
+### Business Applicability
 
-Decision-support systems
+With appropriate domain-specific data and feature engineering, this pipeline can be adapted to:
 
-**Limitations**
+- Sales forecasting  
+- Demand prediction  
+- Revenue estimation  
+- Inventory planning  
+- Decision-support systems  
 
-This is a **deliberately simple and transparent baseline:**
+The structure is intentionally **generic** to allow reuse across multiple business contexts.
 
-advanced feature engineering is not applied,
+---
 
-hyperparameter tuning is limited,
+### Limitations and Design Trade-offs
 
-domain-specific assumptions are not embedded.
+This project makes several **deliberate simplifications**:
 
-These choices are intentional to keep the workflow readable and auditable.
+- Advanced feature engineering is intentionally excluded to keep the pipeline readable.  
+- Hyperparameter tuning is limited to default or near-default values.  
+- No domain-specific assumptions are embedded in the model logic.
 
-**Purpose of This Repository**
+These choices prioritize **auditability and clarity** over marginal performance gains.  
+In a production setting, the first improvements would likely focus on **feature design and domain-informed data transformations** rather than model complexity.
 
-This repository exists as a **portfolio project** to demonstrate:
+---
 
-understanding of real-world ML workflows,
+### Purpose of This Repository
 
-ability to write clean and structured code,
+This repository exists as a **portfolio demonstration** of:
 
-awareness of business-oriented evaluation practices.
+- understanding real-world ML workflows beyond model fitting,  
+- ability to write **clean, structured, and maintainable** ML code,  
+- awareness of how model evaluation connects to **business decisions**.
 
-**Author**
-Machine Learning Engineer
-Focus: Practical ML for Business Decision-Making
+---
+
+### Author
+
+Machine Learning Engineer  
+Focus: building **reliable, interpretable ML systems** for business and operational decision-making, with an emphasis on **correctness, reproducibility, and practical trade-offs**.
