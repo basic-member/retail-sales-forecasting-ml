@@ -1,12 +1,14 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.impute import SimpleImputer
-from sklearn.metrics import mean_absolute_error, mean_squared_error
 import numpy as np
 
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
 # ======================
-# Load sample data
+# Load data
 # ======================
 df = pd.read_csv("sample_data.csv")
 
@@ -21,29 +23,46 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # ======================
-# Handle missing values
+# Pipeline
 # ======================
-imputer = SimpleImputer(strategy="mean")
-X_train = imputer.fit_transform(X_train)
-X_test = imputer.transform(X_test)
+pipeline = Pipeline(steps=[
+    ("imputer", SimpleImputer(strategy="median")),
+    ("model", RandomForestRegressor(random_state=42))
+])
 
 # ======================
-# Train model (demo version)
+# Hyperparameter tuning
 # ======================
-model = RandomForestRegressor(
-    n_estimators=50,
-    random_state=42
+param_grid = {
+    "model__n_estimators": [100, 300],
+    "model__max_depth": [None, 10, 20],
+    "model__min_samples_split": [2, 5],
+}
+
+grid = GridSearchCV(
+    pipeline,
+    param_grid,
+    cv=5,
+    scoring="neg_mean_absolute_error",
+    n_jobs=-1
 )
-model.fit(X_train, y_train)
+
+grid.fit(X_train, y_train)
+
+best_model = grid.best_estimator_
 
 # ======================
-# Predictions
+# Evaluation
 # ======================
-preds = model.predict(X_test)
+preds = best_model.predict(X_test)
 
 mae = mean_absolute_error(y_test, preds)
 rmse = np.sqrt(mean_squared_error(y_test, preds))
+r2 = r2_score(y_test, preds)
 
-print("Demo Results:")
-print("MAE:", round(mae, 2))
+print("Final Model Results")
+print("-------------------")
+print("MAE :", round(mae, 2))
 print("RMSE:", round(rmse, 2))
+print("R2  :", round(r2, 3))
+print("\nBest Params:", grid.best_params_)
